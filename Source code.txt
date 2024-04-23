@@ -1,0 +1,27 @@
+import Adafruit_DHT
+import time
+import requests
+
+# thinkspeak API Endpoints
+THINKSPEAK_URL="https://thingspeak.com/channels/2501720/api_keys"
+
+# thinkspeak write API key
+WRITE_API_KEY="QEI9CW1H2RYJN4PZ"
+
+sensor= Adafruit_DHT.DHT11
+pin =12
+
+try:
+    while True:
+        humidity, temperature = Adafruit_DHT.read_retry(sensor,pin)
+        
+        if humidity is not None and temperature is not None:
+            print(f"Temperature:{temperature:.1f}degree celcius,Humidity:{humidity:.1f}%")
+        else:
+            print("Failed to retrieve data")
+            
+            time.sleep(2)
+            
+            
+except KeyboadInterrupt:
+    print("\nExisting..")
